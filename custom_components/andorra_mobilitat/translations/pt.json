@@ -1,0 +1,26 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Andorra Mobilitat",
+        "description": "Adicione a integração de tráfego de Andorra (mobilitat.ad). Não é necessária nenhuma chave de API.",
+        "data": {
+          "update_interval": "Intervalo de atualização (minutos)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "A integração já está configurada."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opções",
+        "data": {
+          "update_interval": "Intervalo de atualização (minutos)"
+        }
+      }
+    }
+  }
+}
