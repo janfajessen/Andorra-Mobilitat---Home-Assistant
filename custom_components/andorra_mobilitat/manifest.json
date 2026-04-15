@@ -1,0 +1,11 @@
+{
+  "domain": "andorra_mobilitat",
+  "name": "Andorra Mobilitat (Trànsit)",
+  "version": "1.0.0",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": ["beautifulsoup4>=4.12.0"]
+}
