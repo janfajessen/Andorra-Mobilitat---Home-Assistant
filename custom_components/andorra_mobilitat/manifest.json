@@ -1,6 +1,6 @@
 {
   "domain": "andorra_mobilitat",
-  "name": "Andorra Mobilitat (Trànsit)",
+  "name": "Andorra Mobilitat",
   "version": "1.0.0",
   "codeowners": [],
   "config_flow": true,
