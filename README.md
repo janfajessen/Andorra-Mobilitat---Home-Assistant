@@ -98,6 +98,13 @@ automation:
             {% if talls %}{{ talls[0][:100] }}{% endif %}
 ```
 
+*Si esta integración te resulta útil, considera darle una estrella ⭐ en GitHub.*
+O considera apoyar su desarrollo
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buymeacoffee)
+](https://www.buymeacoffee.com/janfajessen) 
+[![Patreon](https://img.shields.io/badge/Patreon-Support-red?style=for-the-badge&logo=patreon)](https://www.patreon.com/janfajessen)
+</div>
+
 </details>
 
 <details>
@@ -163,6 +170,13 @@ automation:
             Phase {{ states('sensor.andorra_mobilitat_color_neu_cg2') | upper }}
             activée. Vérifiez les conditions avant de partir.
 ```
+
+*Si cette intégration vous est utile, n'hésitez pas à lui attribuer une étoile sur GitHub.* 
+Vous pouvez également soutenir son développement
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buymeacoffee)
+](https://www.buymeacoffee.com/janfajessen) 
+[![Patreon](https://img.shields.io/badge/Patreon-Support-red?style=for-the-badge&logo=patreon)](https://www.patreon.com/janfajessen)
+</div>
 
 </details>
 
@@ -230,6 +244,14 @@ automation:
             activated. Check road conditions before leaving.
 ```
 
+*If this integration is useful to you, consider giving it a ⭐ on GitHub.*
+Or consider supporting development!
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buymeacoffee)
+](https://www.buymeacoffee.com/janfajessen) 
+[![Patreon](https://img.shields.io/badge/Patreon-Support-red?style=for-the-badge&logo=patreon)](https://www.patreon.com/janfajessen)
+</div>
+
 </details>
 
 <details>
@@ -295,6 +317,13 @@ automation:
             Fase {{ states('sensor.andorra_mobilitat_color_neu_cg2') | upper }}
             ativada. Verifique as condições antes de sair.
 ```
+
+*Se esta integração for útil para você, considere dar uma ⭐ no GitHub.*
+Ou considere apoiar o desenvolvimento!
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buymeacoffee)
+](https://www.buymeacoffee.com/janfajessen) 
+[![Patreon](https://img.shields.io/badge/Patreon-Support-red?style=for-the-badge&logo=patreon)](https://www.patreon.com/janfajessen)
+</div>
 
 </details>
 
@@ -420,6 +449,15 @@ custom_components/
 ```
 
 ---
+
+*Si aquesta integració es util per a tu, considera donar-li una ⭐ a GitHub.*
+O considera donar suport pel desenvolupament
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buymeacoffee)
+](https://www.buymeacoffee.com/janfajessen) 
+[![Patreon](https://img.shields.io/badge/Patreon-Support-red?style=for-the-badge&logo=patreon)](https://www.patreon.com/janfajessen)
+</div>
+
 
 ## ℹ️ Notes tècniques
 
