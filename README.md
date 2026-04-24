@@ -370,6 +370,145 @@ Afegeix el repositori com a custom repository a HACS i instal·la des d'allà.
 
 ---
 
+## Targeta Lovelace markdown 
+
+```yaml
+type: vertical-stack
+cards:
+  - type: markdown
+    content: >
+      {% set prealerta =
+        is_state('binary_sensor.andorra_mobilitat_prealerta_taronja_vermella_negra', 'on') %}
+      {% set tall =
+        is_state('binary_sensor.andorra_mobilitat_talls_de_circulacio_actius', 'on') %}
+      {% set neu =
+        is_state('binary_sensor.andorra_mobilitat_color_neu_actiu_qualsevol_carretera', 'on') %}
+      {% set update =
+        states('sensor.andorra_mobilitat_ultima_actualitzacio') %}
+
+      <ha-icon icon="mdi:car-multiple"></ha-icon> **ANDORRA MOBILITAT — TRÀNSIT
+      EN TEMPS REAL**
+
+      ---
+
+      {% if prealerta %} > ⚠️ **PREALERTA ACTIVA** — Condicions greus a la xarxa
+      viària {% elif neu %} > ❄️ **Color de neu actiu** — Revisa les carreteres
+      de muntanya {% elif tall %} > 🚧 **Tall de circulació actiu** — Consulta
+      els detalls {% else %} > ✅ **Circulació normal** — Sense incidents
+      destacats {% endif %}
+
+      <small>🕐 Actualitzat: {{ update | as_timestamp |
+      timestamp_custom('%d/%m/%Y %H:%M:%S') }}</small>
+    card_mod:
+      style: |
+        ha-card {
+          background: var(--ha-card-background);
+          border-left: 4px solid
+            {% if is_state('binary_sensor.andorra_mobilitat_prealerta_taronja_vermella_negra', 'on') %}
+              #dc2828
+            {% elif is_state('binary_sensor.andorra_mobilitat_color_neu_actiu_qualsevol_carretera', 'on') %}
+              #ffc800
+            {% else %}
+              #22cc77
+            {% endif %};
+        }
+  - type: markdown
+    content: >
+      ❄️ Colors de la Neu
+
+      {% set roads = [
+        ('CG-1', 'sensor.andorra_mobilitat_color_neu_cg1', 'Andorra · Espanya'),
+        ('CG-2', 'sensor.andorra_mobilitat_color_neu_cg2', 'Envalira · Pas de la Casa'),
+        ('CG-3', 'sensor.andorra_mobilitat_color_neu_cg3', 'Ordino · Serrat'),
+        ('CG-4', 'sensor.andorra_mobilitat_color_neu_cg4', 'La Massana · Pal · Arinsal'),
+      ] %}
+
+      <table> <tr>
+        <th>Carretera</th>
+        <th>Nom</th>
+        <th>Fase</th>
+      </tr> {% for id, eid, nom in roads %} {% set fase = states(eid) %} {% if
+      fase == 'negra' %}{% set badge = '⬛ NEGRA' %} {% elif fase == 'vermella'
+      %}{% set badge = '🔴 VERMELLA' %} {% elif fase == 'taronja' %}{% set badge
+      = '🟠 TARONJA' %} {% elif fase == 'groga' %}{% set badge = '🟡 GROGA' %}
+      {% else %}{% set badge = '🟢 OK' %} {% endif %} <tr>
+        <td><b>{{ id }}</b></td>
+        <td>{{ nom }}</td>
+        <td>{{ badge }}</td>
+      </tr> {% endfor %} </table>
+
+      {% for id, eid, nom in roads %} {% set detall = state_attr(eid, 'detall')
+      %} {% if detall %} <p>ℹ️ <b>{{ id }}:</b> {{ detall }}</p> {% endif %} {%
+      endfor %}
+  - type: markdown
+    content: >
+      ### ⚠️ Incidències Andorra
+
+      {% set total = states('sensor.andorra_mobilitat_incidencies_andorra') |
+      int(0) %} {% set llista =
+      state_attr('sensor.andorra_mobilitat_incidencies_andorra', 'llista') %} {%
+      set tipus  = state_attr('sensor.andorra_mobilitat_incidencies_andorra',
+      'tipus') %}
+
+      **{{ total }}** incidència{{ 'es' if total != 1 else '' }} activa{{ 'es'
+      if total != 1 else '' }}
+
+      {% if total == 0 %} ✅ Cap incidència activa a les carreteres andorranes.
+      {% else %} {% if llista %} {% for i in range(llista | length) %} {% set t
+      = tipus[i] if tipus else 'other' %} {% if t == 'neu' %}{% set ico = '❄️'
+      %} {% elif t == 'tall' %}{% set ico = '🚧' %} {% elif t == 'obres' %}{%
+      set ico = '🔨' %} {% else %}{% set ico = '⚠️' %} {% endif %} --- {{ ico }}
+      {{ llista[i] | replace('\n', ' · ') }} {% endfor %} {% endif %} {% endif
+      %}
+  - type: markdown
+    content: >
+      ### 🚧 Talls de circulació
+
+      {% set total = states('sensor.andorra_mobilitat_talls_de_circulacio') |
+      int(0) %} {% set llista =
+      state_attr('sensor.andorra_mobilitat_talls_de_circulacio', 'llista') %}
+
+      **{{ total }}** tall{{ 's' if total != 1 else '' }} actiu{{ 's' if total
+      != 1 else '' }}
+
+      {% if total == 0 %} ✅ Cap tall actiu. {% else %} {% if llista %} {% for
+      item in llista %} --- 🚧 {{ item | replace('\n', ' · ') }} {% endfor %} {%
+      endif %} {% endif %}
+  - type: markdown
+    content: >
+      ### 🔨 Obres en carretera
+
+      {% set total = states('sensor.andorra_mobilitat_obres_en_carretera') |
+      int(0) %} {% set llista =
+      state_attr('sensor.andorra_mobilitat_obres_en_carretera', 'llista') %}
+
+      **{{ total }}** obra{{ 'es' if total != 1 else '' }} activa{{ 'es' if
+      total != 1 else '' }}
+
+      {% if total == 0 %} ✅ Cap obra activa. {% else %} {% if llista %} {% for
+      item in llista %} --- 🔨 {{ item | replace('\n', ' · ') }} {% endfor %} {%
+      endif %} {% endif %}
+  - type: glance
+    title: Estats
+    show_name: true
+    show_icon: true
+    show_state: true
+    entities:
+      - entity: binary_sensor.andorra_mobilitat_talls_de_circulacio_actius
+        name: Talls
+      - entity: binary_sensor.andorra_mobilitat_color_neu_actiu_qualsevol_carretera
+        name: Neu activa
+      - entity: binary_sensor.andorra_mobilitat_prealerta_taronja_vermella_negra
+        name: Prealerta
+      - entity: sensor.andorra_mobilitat_fase_neu_pitjor_activa
+        name: Pitjor fase
+      - entity: sensor.andorra_mobilitat_ultima_actualitzacio
+        name: Actualitzat
+
+```
+
+---
+
 ## 🤖 Exemples d'automatitzacions
 
 ### Notificació quan CG-2 passa a fase vermella o negra
