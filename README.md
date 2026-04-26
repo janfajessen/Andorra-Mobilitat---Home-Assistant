@@ -2,7 +2,7 @@
 
 # Andorra Mobilitat <br> Home Assistant Integration
 
-<img src="brands/logo@2x.png" width="450"/>
+<img src="https://github.com/janfajessen/Andorra-Mobilitat---Home-Assistant/blob/bad2eb0dbea015c3b3a31f3c167410439e1113a9/brand/logo%402x.png" width="450"/>
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
 ![HA](https://img.shields.io/badge/Home%20Assistant-2024.1+-orange?style=for-the-badge&logo=home-assistant)
@@ -31,7 +31,7 @@ No se necesita ninguna clave de API ni registro.
 2. Reinicia HA.
 3. Ve a **Configuración → Integraciones → + Añadir integración** y busca **Andorra Mobilitat**.
 4. Introduce el intervalo de actualización (por defecto 5 minutos) y acepta.
-<img src="brands/icon@2x.png" width="100"/>
+<img src="https://github.com/janfajessen/Andorra-Mobilitat---Home-Assistant/blob/bad2eb0dbea015c3b3a31f3c167410439e1113a9/brand/icon%402x.png" width="100"/>
 
 **Opción B — HACS**
 Añade el repositorio como custom repository en HACS e instala desde allí.
@@ -122,7 +122,7 @@ Aucune clé API ni inscription requise.
 2. Redémarrez HA.
 3. Allez dans **Configuration → Intégrations → + Ajouter une intégration** et cherchez **Andorra Mobilitat**.
 4. Entrez l'intervalle de mise à jour (5 minutes par défaut) et validez.
-<img src="brands/icon@2x.png" width="100"/>
+<img src="https://github.com/janfajessen/Andorra-Mobilitat---Home-Assistant/blob/bad2eb0dbea015c3b3a31f3c167410439e1113a9/brand/icon%402x.png" width="100"/>
 
 **Option B — HACS**
 Ajoutez le dépôt comme custom repository dans HACS et installez depuis là.
@@ -195,7 +195,7 @@ No API key or registration required.
 2. Restart HA.
 3. Go to **Settings → Integrations → + Add integration** and search for **Andorra Mobilitat**.
 4. Enter the update interval (default 5 minutes) and confirm.
-<img src="brands/icon@2x.png" width="100"/>
+<img src="https://github.com/janfajessen/Andorra-Mobilitat---Home-Assistant/blob/bad2eb0dbea015c3b3a31f3c167410439e1113a9/brand/icon%402x.png" width="100"/>
 
 **Option B — HACS**
 Add the repository as a custom repository in HACS and install from there.
@@ -269,7 +269,7 @@ Não é necessária nenhuma chave de API nem registo.
 2. Reinicie o HA.
 3. Vá a **Configuração → Integrações → + Adicionar integração** e pesquise **Andorra Mobilitat**.
 4. Introduza o intervalo de atualização (5 minutos por padrão) e confirme.
-<img src="brands/icon@2x.png" width="100"/>
+<img src="https://github.com/janfajessen/Andorra-Mobilitat---Home-Assistant/blob/bad2eb0dbea015c3b3a31f3c167410439e1113a9/brand/icon%402x.png" width="100"/>
 
 **Opção B — HACS**
 Adicione o repositório como custom repository no HACS e instale a partir daí.
@@ -336,7 +336,7 @@ Ou considere apoiar o desenvolvimento!
 2. Reinicia HA.
 3. Ves a **Configuració → Integracions → + Afegir integració** i cerca **Andorra Mobilitat**.
 4. Introdueix l'interval d'actualització (per defecte 5 minuts) i accepta.
-<img src="brands/icon@2x.png" width="100"/>
+<img src="https://github.com/janfajessen/Andorra-Mobilitat---Home-Assistant/blob/bad2eb0dbea015c3b3a31f3c167410439e1113a9/brand/icon%402x.png" width="100"/>
 
 ### Opció B — HACS
 Afegeix el repositori com a custom repository a HACS i instal·la des d'allà.
