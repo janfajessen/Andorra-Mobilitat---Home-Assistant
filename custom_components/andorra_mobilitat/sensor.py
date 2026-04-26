@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Any
 
 from homeassistant.components.sensor import (
@@ -38,7 +37,7 @@ STATIC_SENSORS: tuple[MobilitatSensorDescription, ...] = (
     MobilitatSensorDescription(
         key="incidents_total",
         name="Incidències Andorra",
-        icon="mdi:alert-circle-outline",
+        icon="mdi:traffic-cone",
         native_unit_of_measurement="incidències",
         data_key="incidents_total",
         extra_attrs_key="incidents",
@@ -84,18 +83,16 @@ async def async_setup_entry(
 
     entities: list[SensorEntity] = []
 
-    # Static sensors
     for desc in STATIC_SENSORS:
         entities.append(MobilitatStaticSensor(coordinator, desc))
 
-    # One snow-color sensor per road
     for road_id, road_cfg in ROADS.items():
         entities.append(MobilitatSnowSensor(coordinator, road_id, road_cfg["name"]))
 
     async_add_entities(entities)
 
 
-# ─── Base ───────────────────────────────────────────────────
+# ─── Base ────────────────────────────────────────────────────
 
 class MobilitatBaseSensor(CoordinatorEntity[MobilitatCoordinator], SensorEntity):
     """Base class with common attributes."""
@@ -108,7 +105,7 @@ class MobilitatBaseSensor(CoordinatorEntity[MobilitatCoordinator], SensorEntity)
         self._attr_device_info = DEVICE_INFO
 
 
-# ─── Static sensors ─────────────────────────────────────────
+# ─── Static sensors ──────────────────────────────────────────
 
 class MobilitatStaticSensor(MobilitatBaseSensor):
     """Generic sensor reading a key from coordinator data."""
@@ -127,8 +124,7 @@ class MobilitatStaticSensor(MobilitatBaseSensor):
     def native_value(self) -> Any:
         if self.coordinator.data is None:
             return None
-        val = self.coordinator.data.get(self.entity_description.data_key)
-        return val
+        return self.coordinator.data.get(self.entity_description.data_key)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
@@ -142,8 +138,9 @@ class MobilitatStaticSensor(MobilitatBaseSensor):
         if not raw:
             return attrs
         if isinstance(raw[0], dict):
+            # Full text — no truncation
             attrs["total"] = len(raw)
-            attrs["llista"] = [i["text"][:250] for i in raw]
+            attrs["llista"] = [i["text"] for i in raw]
             attrs["tipus"]  = [i["type"] for i in raw]
         else:
             attrs["llista"] = raw
@@ -182,10 +179,12 @@ class MobilitatSnowSensor(MobilitatBaseSensor):
             "carretera": road_cfg.get("name", self._road_id),
             "fase":      fase,
         }
+        # Full detail text — no truncation
         if self.coordinator.data and fase != "ok":
             for inc in self.coordinator.data.get("neu_incidents", []):
                 kws = ROADS[self._road_id]["keywords"]
                 if any(k.upper() in inc["text"].upper() for k in kws):
-                    attrs["detall"] = inc["text"][:300]
+                    attrs["detall"] = inc["text"]
                     break
         return attrs
+        

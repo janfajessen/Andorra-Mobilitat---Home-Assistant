@@ -72,7 +72,7 @@ class MobilitatCoordinator(DataUpdateCoordinator):
                         EVENT_NEW_INCIDENT,
                         {
                             "tipus": inc["type"],
-                            "text":  inc["text"][:300],
+                            "text":  inc["text"],
                         },
                     )
                     _LOGGER.info(
@@ -128,6 +128,7 @@ def _parse_andorra_incidents(soup: BeautifulSoup) -> list[dict]:
         if not cells:
             continue
 
+        # Full text, no truncation
         text = cells[-1].get_text(separator="\n").strip()
         if len(text) < 5:
             continue
@@ -180,10 +181,10 @@ def _parse_page(html: str) -> dict:
 
     snow = _parse_snow_colors(incidents)
 
-    talls  = [i for i in incidents if i["type"] == INCIDENT_TYPE_TALL]
-    obres  = [i for i in incidents if i["type"] == INCIDENT_TYPE_OBRES]
-    neu    = [i for i in incidents if i["type"] == INCIDENT_TYPE_NEU]
-    other  = [i for i in incidents if i["type"] == INCIDENT_TYPE_OTHER]
+    talls = [i for i in incidents if i["type"] == INCIDENT_TYPE_TALL]
+    obres = [i for i in incidents if i["type"] == INCIDENT_TYPE_OBRES]
+    neu   = [i for i in incidents if i["type"] == INCIDENT_TYPE_NEU]
+    other = [i for i in incidents if i["type"] == INCIDENT_TYPE_OTHER]
 
     max_severity = max((SNOW_SEVERITY[v] for v in snow.values()), default=0)
     worst_label  = next(
@@ -191,19 +192,19 @@ def _parse_page(html: str) -> dict:
     )
 
     return {
-        "incidents":        incidents,
-        "incidents_total":  len(incidents),
-        "talls":            talls,
-        "talls_count":      len(talls),
-        "obres":            obres,
-        "obres_count":      len(obres),
-        "neu_incidents":    neu,
-        "other":            other,
-        "snow":             snow,
-        "worst_snow_fase":  worst_label,
-        "any_snow_active":  any(v != "ok" for v in snow.values()),
-        "any_tall_active":  len(talls) > 0,
-        "prealerta":        max_severity >= SNOW_SEVERITY.get("taronja", 2),
-        "last_update":      datetime.now(timezone.utc),
+        "incidents":       incidents,
+        "incidents_total": len(incidents),
+        "talls":           talls,
+        "talls_count":     len(talls),
+        "obres":           obres,
+        "obres_count":     len(obres),
+        "neu_incidents":   neu,
+        "other":           other,
+        "snow":            snow,
+        "worst_snow_fase": worst_label,
+        "any_snow_active": any(v != "ok" for v in snow.values()),
+        "any_tall_active": len(talls) > 0,
+        "prealerta":       max_severity >= SNOW_SEVERITY.get("taronja", 2),
+        "last_update":     datetime.now(timezone.utc),
     }
     
